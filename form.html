@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey Form</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <style>
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Survey Form</h1>
+  
+  <form id="surveyForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" required><br><br>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required><br><br>
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" required><br><br>
+    
+    <label for="country">Country:</label>
+    <select id="country" required>
+      <option value="" disabled selected>Select a country</option>
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="UK">UK</option>
+      <option value="Australia">Australia</option>
+    </select><br><br>
+    
+    <label>Gender:</label><br>
+    <input type="checkbox" id="maleCheckbox">
+    <label for="maleCheckbox">Male</label>
+    <input type="checkbox" id="femaleCheckbox">
+    <label for="femaleCheckbox">Female</label><br><br>
+    
+    <label for="profession">Profession:</label>
+    <input type="text" id="profession" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br><br>
+    
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" required><br><br>
+    
+    <button type="button" onclick="submitForm()">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+  <div id="popup" class="hidden">
+    <div class="overlay"></div>
+    <div class="popup">
+      <h2>Survey Form Submission</h2>
+      <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+      <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+      <p><strong>Date of Birth:</strong> <span id="popupDob"></span></p>
+      <p><strong>Country:</strong> <span id="popupCountry"></span></p>
+      <p><strong>Gender:</strong> <span id="popupGender"></span></p>
+      <p><strong>Profession:</strong> <span id="popupProfession"></span></p>
+      <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+      <p><strong>Mobile Number:</strong> <span id="popupMobile"></span></p>
+      <button type="button" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function submitForm() {
+      var firstName = document.getElementById("firstName").value;
+      var lastName = document.getElementById("lastName").value;
+      var dob = document.getElementById("dob").value;
+      var country = document.getElementById("country").value;
+      var gender = "";
+      if (document.getElementById("maleCheckbox").checked) {
+        gender += "Male ";
+      }
+      if (document.getElementById("femaleCheckbox").checked) {
+        gender += "Female";
+      }
+      var profess
+ion = document.getElementById("profession").value;
+      var email = document.getElementById("email").value;
+      var mobile = document.getElementById("mobile").value;
+
+      if (firstName && lastName && dob && country && gender && profession && email && mobile) {
+        document.getElementById("popupFirstName").textContent = firstName;
+        document.getElementById("popupLastName").textContent = lastName;
+        document.getElementById("popupDob").textContent = dob;
+        document.getElementById("popupCountry").textContent = country;
+        document.getElementById("popupGender").textContent = gender;
+        document.getElementById("popupProfession").textContent = profession;
+        document.getElementById("popupEmail").textContent = email;
+        document.getElementById("popupMobile").textContent = mobile;
+
+        document.getElementById("popup").classList.remove("hidden");
+      } else {
+        alert("Please fill in all the fields.");
+      }
+    }
+
+    function closePopup() {
+      document.getElementById("popup").classList.add("hidden");
+      document.getElementById("surveyForm").reset();
+    }
+  </script>
+</body>
+</html>
